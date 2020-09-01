@@ -51,7 +51,7 @@ set for the location, all overworld locations will display their coordinates in 
 Currently deleting a place is not supported from within the CLI. If you have a place you want to delete simply open
 the locations csv file (the file you specified in the command line arguments) and delete that row.
 
-## Edition a place
+## Editing a place
 
 Editing a place is also not currently supported. If you need to edit a place you'll need to edit it from within
 the CSV file as well.
