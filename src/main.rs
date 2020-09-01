@@ -1,10 +1,19 @@
 use std::fs::File;
 use std::io::{prelude::*, BufReader};
+use std::env;
+
 use regex::Regex;
 use colored::*;
 
 fn main() {
-    let mut locations: Vec<Location> = load_csv();
+    let args: Vec<String> = env::args().collect();
+    if args.len() < 2 {
+        println!("No locations file was specified");
+        println!("usage: minecraft_tracker <file_location>");
+        return;
+    }
+    let csv_file_name = &args[1];
+    let mut locations: Vec<Location> = load_csv(&csv_file_name);
     loop {
         println!("What would you like to do?");
         println!("[A]dd a place");
@@ -12,12 +21,12 @@ fn main() {
         println!("[Q]uit");
         let cmd = get_input("");
         if cmd == "Q" || cmd == "q" {
-            save_csv(&locations).expect("Unable to save locations.csv");
+            save_csv(&locations, &csv_file_name).expect("Unable to save locations.csv");
             break;
         }
         if cmd == "A" || cmd == "a" {
             add_location(&mut locations);
-            save_csv(&locations).expect("Unable to save locations.csv");
+            save_csv(&locations, &csv_file_name).expect("Unable to save locations.csv");
         }
         if cmd == "S" || cmd == "s" {
             search_location(&locations);
@@ -163,20 +172,20 @@ fn print_location(row: &Location) {
     }
 }
 
-fn save_csv(locations: &Vec<Location>) -> std::io::Result<()> {
+fn save_csv(locations: &Vec<Location>, file_name: &String) -> std::io::Result<()> {
     let mut data = String::new();
     for loc in locations {
         data += &to_csv_line(loc);
         data += "\n"
     }
-    let mut file = File::create("/Users/brandon/rust/minecraft_tracker/locations.csv")?;
+    let mut file = File::create(file_name)?;
     file.write_all(data.as_bytes())?;
     Ok(())
 }
 
-fn load_csv() -> Vec<Location> {
+fn load_csv(file_name: &String) -> Vec<Location> {
     let mut ret: Vec<Location> = Vec::new();
-    let file = match File::open("/Users/brandon/rust/minecraft_tracker/locations.csv") {
+    let file = match File::open(file_name) {
         Ok(file) => file,
         Err(_) => return ret,
     };
