@@ -1,19 +1,13 @@
 # Minecraft Tracker
-This is a simple rust CLI that designed to track locations in minecraft. It extreamly simple and only allow the user to
-add a locations coordinates and then later search all the coordinates that have been added. This is useful if you're
-exploring the map and want to take not of an interesting location to come back and explore at a later time.
-
-The program is extreamly simple. Once the program is
-started you have 3 options [A] to add a new location. [S] to search all the exsisting locations. [Q] to quit the program.
-All options are case sensitive. Adding a new location will ask you to add a location name, description and then it's coordinates
-including the dimention you are in (Overworld, Nether, The End). Search text is complied into a regex so you any regex text
-can be used to search locations. The search currently only looks through location titles.
+This is a simple rust CLI that is designed to track locations in minecraft. It extremely simple and only allow the user to
+add a location's coordinates and then later search all the coordinates that have been added. This is useful if you're
+exploring the map and want to take note of an interesting location to come back and explore at a later time.
 
 # Getting Started
 
-Using this CLI is very simple. First clone the repo to your computer. This tool was complied for Mac OSX.
+Using this CLI tool is easy. First clone this repo to your computer. Minecraft Tracker was originally compiled for Mac OSX.
 If you are running a different operating system (Windows/Linux etc.) you'll need to recompile the project.
-You can complie this project using cargo by following instructions on the [rust website](https://doc.rust-lang.org/cargo/index.html). Once you have the project downloaded and compiled you can run the tool from the terminal.
+You can compile this project using cargo by following instructions on the [rust website](https://doc.rust-lang.org/cargo/index.html). Once you have the project downloaded and compiled you can run the tool from the terminal.
 
 ```./minecraft_tracker/target/release/minecraft_tracker locations.csv```
 
@@ -36,19 +30,21 @@ Choose something descriptive (e.g. Desert Village) as this will be used later by
 Next you'll be asked to give a description. 
 You can leave this blank, or you can add some more information about the location you added 
 (e.g. this village is near spawn and a desert temple).
-Once you've entered a description you'll be prompted to specify the dimention your location is in.
+Once you've entered a description you'll be prompted to specify the dimension your location is in.
     1) [O]verworld
     2) [N]ether
     3) [E]nd
 Again, you make your choice by using the first letter of the command (e.g. o, n or e). These commands are case insensitive.
-finally you'll have to enter the x, y and z coordinates. Be sure to press enter after entering each of the coordinates.
+finally you'll have to enter the x, y and z coordinates. Coordinates should be entered as whole numbers rather than decimals.
+Be sure to press enter after entering each of the coordinates.
 
 ## Searching your places
 
 ![Search A Place](https://github.com/bjatkin/minecraft_tracker/blob/master/img/mine_track_search.png)
 
 When searching your places you'll be asked to input a query. This is a regex that will attempt to match against 
-all the place names. If a match is found the place will be displayed.
+all the place names. If a match is found the place will be displayed. In addition to the coordinates you originally
+set for the location, all overworld locations will display their coordinates in the nether and vice versa.
 
 ## Deleting a place
 
@@ -66,6 +62,7 @@ If you find a bug in this software please open an issue on the github repo. I'll
 If you'd like to help contribute to this project please contact me at opensource.atkin@gmail.com.
 
 # TODO 
+ * Compile for multiple platforms to make it easier to use for non-technical users
  * Edit old entries
  * Delete old entries
  * Search nearby specified coordinates
